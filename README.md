@@ -1,28 +1,19 @@
 # Power-BI-Dashboarding-Project-NYC-Car-Accidents
 
-### Project Inspiration 
+### Project Introduction
 -------------------------------------------------------------------------------------------------------------
-I am deeply intrigued by the rise of the general population's interest to self-driving cars. 
-Those who oppose autonomous vehicles emphasize the potential harm they might bring to the job availability of drivers
-and to the environment, in terms of energy consumption.
-
-Self-driving car enthusiasts argue that this new technology will have more positive effects than negative ones.
-As these cars are algorithm-driven, equipped with sensors and cameras of their own that can detect other vehicles and can understand
-traffic rules, they are better equipped to avoid accidents than humans.
 
 According to the WHO, road mishaps cause 1.3 million deaths per year, with pedestrians, cyclists, and motorcyclists
-being the top victims. It is also worth noting that road injuries are the leading cause of death for ages 5-29 (read more [here](https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries))
+being the top victims. It is also worth noting that road injuries are the leading cause of death for ages 5-29 (read more [here](https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries)). I decided to look into a dataset that could shed light on the factors affecting
+the incidence of car accidents. 
 
-Time and time again, humanity has overcome the problem of jobs being obsolete. 
-Although horse carriage drivers have been long gone, we have creatively come up with ways to 
-bring about new jobs more suitable with our technology.
 
-Will it be worth it for people to be more accepting of self-driving cars, if it means saving millions of lives? 
-Or should we just first dig up on existing data, and identify variables/factors that we can improve on to lessen risks of car accidents?
-
-### Data
+### Data - Motor Vehicle Collisions 
 -------------------------------------------------------------------------------------------------------------
 The data is originally sourced [here](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95). 
+
+All the records in the Motor Vehicle Collisions dataset are from daily reports of NYPD. All car accidents that incurred injuries, deaths, or more than $1000 worth of damages are required to be filed into a police report (MV104-AN). There are collected records as early as 2012, and is continuosly updated on a daily basis up to this writing (April).  In total, there are 1.9 million records used in accomplishing the dashboard. All records for year 2023 are excluded as the records for the coming months are yet to be recorded. 
+
 
 Here's a snippet of the raw data:
 
@@ -35,7 +26,7 @@ Here's a snippet of the raw data:
 
 
 
-The ff. steps are used to transform the data using SQL (see SQL script [here](https://github.com/blumea7/Power-BI-Dashboarding-Project-NYC-Car-Accidents/tree/main/sql-scripts))
+The ff. steps are used to transform the data using SQL (see script [here](https://github.com/blumea7/Power-BI-Dashboarding-Project-NYC-Car-Accidents/tree/main/sql-scripts))
 
 
     1. Renamed/simplified lengthy columns 
@@ -62,15 +53,90 @@ Create a dashboard that will give a brief overview of:
       - the leading causes of vehicular accidents in NYC
       - the types and quantity of vehicles involved in the accidents
       - the most dangerous streets for motorists, cyclists, and pedestrians
-      - the effect of different time frames on the occurrence of accidents
+      - occurrence of accidents plotted against different timeframes
       
 Note: Feel free to add other interesting visuals that may bring about insightful information 
 
 
-### Dashboard / Data Visualization
+### Dashboards
 -------------------------------------------------------------------------------------------------------------
-To follow...
+#### Overview
+![Dashboard Overview](https://github.com/blumea7/Power-BI-Dashboarding-Project-NYC-Car-Accidents/blob/main/assets/Dashboard%20Overview.JPG)
 
+##### Insights
+    1. 679,000 records have unspecified reason for collision
+            - to improve the data, it is recommended that the NYPD improves on taking note of the causes of collision
+            
+    2. All identified major causes of car collisions in NYC are caused by poor driving habits or human error.
+            - Law makers could look into their existing laws and find possible points of improvements 
+              in providing stricter rules, fines, and implementation.
+    
+    3. Majority of injuries caused by car collisions involve motorists (72.81%),
+       while majority of fatalities involve both pedestrians (51.52%) and motorists (41%). 
+    
+    4. The top 10 most dangerous streets are identified; There is a visual slicer so that streets 
+       that are dangerous to specific types of non-vehiclar road users (pedestrians, cyclists, motorists) 
+       could be identified. This is done so local city planners and law makers could specifically determine what 
+       kind of improvement to perform on different streets.
+       
+            For streets dangerous to pedetrians, the ff. can be explored:
+                - installation of walk-way road barriers
+                - addition and/or proper placement of pedestrian lanes
+                - usage of underpass or overpass
+                
+            For streets dangerous to cyclists, the ff. can be explored:
+                - bike lane design 
+                - road impairments, holes, and other damages
+                - bike lane-road barriers
+                - for busy streets, heavy-duty barriers should be used
+
+                
+             Other points of improvement that can be explored:
+                - addition of traffic personnel
+                - review existing traffic control systems
+                - review of existing speed limit
+                    
+    5. Most car accidents involve 2 vehicles, but those involving only 1 vehicle caused the most number of deaths. 
+            - actually it is established that the lower the number of involved vehicle, 
+              the higher the number of deaths, and vice versa.
+            
+               
+#### Time Factors
+![Time Factors](https://github.com/blumea7/Power-BI-Dashboarding-Project-NYC-Car-Accidents/blob/main/assets/Time%20Factors.JPG)
+
+
+    1. The number of car accidents follow a downward trend since 2018
+            - possibly because of impositon of lower speed limits during that year
+            
+    2. There was an abrupt decline of car accidents in 2020 because of the COVID-19 pandemic.
+            - the trend did not recover since then, possibly because of the adaptation of workspaces to hybrid setup
+            - it is recommended that local law makers look into promoting fully work-from-home / hybrid work setups
+            
+    3. Usually, number of recorded collisions peak at Fridays.
+    
+    4. On an hourly basis, the number of car accidents starts to rise by 6-7 AM and peaks at 4-5 PM. 
+            - It is recommended that the LGU encourage office managements to give flexible rules for 
+              clocking in and clocking out so that inflow of cars can be distributed across a wider time range. 
+            
+            
 ### Power BI Notes 
 -------------------------------------------------------------------------------------------------------------
-To follow...
+#### Data Model
+
+![Data Model](https://github.com/blumea7/Power-BI-Dashboarding-Project-NYC-Car-Accidents/blob/main/assets/Data%20Model.JPG)
+
+Notes: 
+
+        1. Originally, there was only one table which contains the raw dataset (NYC Accident). 
+        2. Stacked Chart Legend Order and Time order Tables were created to customize the sorting 
+           order of the stacked column chart and the hour group labels in the Time Factors Dashboard
+        3. Casualty Classification and Involved People Talbes were created to create
+           the Top 10 Most Dangerous Streets Visual in the Overview Dashboard
+        4. Base Measures table contains the custom measures and calculations used to display needed in the visuals.
+  
+#### Custom Sorting of Stacked Column Chart
+To follow... 
+
+#### Using DAX to create the Top 10 Most Dangerous Streets Visual
+To follow... 
+
